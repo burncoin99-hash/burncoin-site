@@ -2,103 +2,76 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BurnCoin — Airdrop Dashboard</title>
-  <meta name="description" content="BurnCoin — claim daily points, referrals, spin bonus, and social share. Countdown to airdrop distribution." />
-  <link rel="icon" href="flame.svg">
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BurnCoin Airdrop System</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    h1 { color: #ff4b2b; }
+    button {
+      background: linear-gradient(90deg, #ff4b2b, #ff416c);
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px;
+    }
+    button:hover { opacity: 0.9; }
+    #burnPointsDisplay {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <img src="flame.svg" alt="" class="flame"/>
-      <span class="logo">BURNCOIN</span>
-    </div>
-    <nav class="actions">
-      <!-- TODO: replace with your real token address -->
-      <a class="btn buy" target="_blank"
-         href="https://pancakeswap.finance/swap?outputCurrency=YOUR_BURN_TOKEN_ADDRESS">
-        Buy Burn Coin
-      </a>
-    </nav>
-  </header>
+  <h1>🔥 BurnCoin Airdrop 🔥</h1>
+  <p>Spin once every 24 hours to win Burn Points!</p>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>BurnCoin Airdrop Dashboard</h1>
-      <p class="sub">Claim points every 24 hours, invite friends, spin & win, and share on social. Your points are saved on this device.</p>
-      <div class="countdown">
-        <h3>Airdrop distribution starts in:</h3>
-        <div id="countdownText" class="cd">—</div>
-      </div>
-    </section>
+  <button id="btnSpin">🎰 Spin Now</button>
+  <div id="burnPointsDisplay">0</div>
+  <p>Total Burn Points</p>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Daily Claim</h2>
-        <p class="big"><span id="dailyPoints">0</span> pts</p>
-        <p>Claim every 24 hours</p>
-        <button id="claimBtn" class="btn primary">Claim</button>
-        <div id="claimTimer" class="muted"></div>
-      </article>
+  <a href="https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657" target="_blank">
+    <button>💰 Buy BurnCoin Now</button>
+  </a>
 
-      <article class="card">
-        <h2>Referral</h2>
-        <p class="big"><span id="refPoints">0</span> pts</p>
-        <p>50 pts when your friend makes their first claim</p>
-        <div class="row">
-          <input id="refLink" class="input" readonly />
-          <button id="copyRef" class="btn">Copy Link</button>
-        </div>
-      </article>
+  <footer style="margin-top:40px;color:#999;">© 2025 BurnCoin Project</footer>
 
-      <article class="card">
-        <h2>Social Share</h2>
-        <p>Once per 24 hrs: FB (20), IG (20), Messenger (10)</p>
-        <div class="social">
-          <button class="btn" data-soc="fb">Share Facebook</button>
-          <button class="btn" data-soc="ig">Share Instagram</button>
-          <button class="btn" data-soc="ms">Share Messenger</button>
-        </div>
-        <p class="muted" id="socialNote">Visits from different IPs recommended to prevent abuse.</p>
-        <p class="big"><span id="socialPoints">0</span> pts</p>
-      </article>
-
-      <article class="card spin">
-        <h2>Spin &amp; Win</h2>
-        <canvas id="wheel" width="260" height="260" aria-label="spin wheel"></canvas>
-        <button id="spinBtn" class="btn">SPIN</button>
-        <p class="muted">Up to 100 pts, once per 24 hrs</p>
-        <p class="big"><span id="spinPoints">0</span> pts</p>
-      </article>
-    </section>
-
-    <section class="total">
-      <h2>Grand Total</h2>
-      <div class="totalNum" id="grandTotal">0</div>
-    </section>
-
-    <section class="proofs">
-      <h2>Lock Proofs</h2>
-      <ul>
-        <li>LP Lock: <a target="_blank" href="https://bscscan.com/address/0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657">0x2FAf...0657</a></li>
-        <li>Airdrop Lock: <a target="_blank" href="https://bscscan.com/address/0x78ccc4667F0e65A243811d014E8B46D929151389">0x78cc...1389</a></li>
-        <li>Owner/Team Lock: <a target="_blank" href="https://bscscan.com/address/0x776d37070174F60A5819d4e3CF6c7d38578599B7">0x776d...99B7</a></li>
-      </ul>
-    </section>
-
-    <section class="docs">
-      <a class="btn" href="whitepaper.pdf" target="_blank">White Paper (PDF)</a>
-      <a class="btn" href="deploy-code.pdf" target="_blank">Deploy Code (PDF)</a>
-    </section>
-
-    <footer class="foot">
-      <small>A small gas fee is required on withdraw. © BurnCoin</small>
-      <a class="btn buy mini" target="_blank"
-         href="https://pancakeswap.finance/swap?outputCurrency=YOUR_BURN_TOKEN_ADDRESS">Buy Burn Coin</a>
-    </footer>
-  </main>
-
-  <script src="script.js"></script>
+  <script>
+    const CFG = {
+      SPIN_PRIZES: [
+        { points: 10, weight: 50 },
+        { points: 20, weight: 20 },
+        { points: 30, weight: 20 },
+        { points: 50, weight: 6 },
+        { points: 100, weight: 4 }
+      ],
+      SPIN_COOLDOWN_SEC: 24 * 3600
+    };
+    const K = { POINTS:"burn_points_total", LAST_SPIN:"burn_last_spin_ts" };
+    const now = ()=>Math.floor(Date.now()/1000);
+    const canAfter = (k,s)=>now()-(parseInt(localStorage.getItem(k)||"0"))>=s;
+    const stamp = k=>localStorage.setItem(k,String(now()));
+    const getPts = ()=>parseInt(localStorage.getItem(K.POINTS)||"0");
+    const setPts = n=>{localStorage.setItem(K.POINTS,String(Math.max(0,n)));document.getElementById("burnPointsDisplay").textContent=getPts();};
+    const add = n=>setPts(getPts()+Number(n||0));
+    const weightedPick = list=>{let tot=list.reduce((s,i)=>s+(i.weight||0),0);let r=Math.random()*tot;for(let i of list){if(r<i.weight)return i;r-=i.weight;}return list[list.length-1];};
+    document.getElementById("btnSpin").addEventListener("click",()=>{
+      if(!canAfter(K.LAST_SPIN,CFG.SPIN_COOLDOWN_SEC)){alert("Spin available once per 24 hours!");return;}
+      const p=weightedPick(CFG.SPIN_PRIZES).points;
+      add(p);stamp(K.LAST_SPIN);
+      alert🎉 You won ${p} points!`);
+      window.open("https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657","_blank");
+    });
+    document.addEventListener("DOMContentLoaded",()=>setPts(getPts()));
+  </script>
 </body>
 </html>
