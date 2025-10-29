@@ -1,0 +1,523 @@
+
+You sent
+Code   Issues   Pull requests   Actions   Projects   Wiki   Security   Insights   Settings
+You sent
+https://github.com
+You sent
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BurnCoin Airdrop System</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    h1 { color: #ff4b2b; }
+    button {
+      background: linear-gradient(90deg, #ff4b2b, #ff416c);
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px;
+    }
+    button:hover { opacity: 0.9; }
+    #burnPointsDisplay {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 BurnCoin Airdrop 🔥</h1>
+  <p>Spin once every 24 hours to win Burn Points!</p>
+
+  <button id="btnSpin">🎰 Spin Now</button>
+  <div id="burnPointsDisplay">0</div>
+  <p>Total Burn Points</p>
+
+  <a href="https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657" target="_blank">
+    <button>💰 Buy BurnCoin Now</button>
+  </a>
+
+  <footer style="margin-top:40px;color:#999;">© 2025 BurnCoin Project</footer>
+
+  <script>
+    const CFG = {
+      SPIN_PRIZES: [
+        { points: 10, weight: 50 },
+        { points: 20, weight: 20 },
+        { points: 30, weight: 20 },
+        { points: 50, weight: 6 },
+        { points: 100, weight: 4 }
+      ],
+      SPIN_COOLDOWN_SEC: 24 * 3600
+    };
+    const K = { POINTS:"burn_points_total", LAST_SPIN:"burn_last_spin_ts" };
+    const now = ()=>Math.floor(Date.now()/1000);
+    const canAfter = (k,s)=>now()-(parseInt(localStorage.getItem(k)||"0"))>=s;
+    const stamp = k=>localStorage.setItem(k,String(now()));
+    const getPts = ()=>parseInt(localStorage.getItem(K.POINTS)||"0");
+    const setPts = n=>{localStorage.setItem(K.POINTS,String(Math.max(0,n)));document.getElementById("burnPointsDisplay").textContent=getPts();};
+    const add = n=>setPts(getPts()+Number(n||0));
+    const weightedPick = list=>{let tot=list.reduce((s,i)=>s+(i.weight||0),0);let r=Math.random()*tot;for(let i of list){if(r<i.weight)return i;r-=i.weight;}return list[list.length-1];};
+    document.getElementById("btnSpin").addEventListener("click",()=>{
+      if(!canAfter(K.LAST_SPIN,CFG.SPIN_COOLDOWN_SEC)){alert("Spin available once per 24 hours!");return;}
+      const p=weightedPick(CFG.SPIN_PRIZES).points;
+      add(p);stamp(K.LAST_SPIN);
+      alert🎉 You won ${p} points!`);
+      window.open("https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657","_blank");
+    });
+    document.addEventListener("DOMContentLoaded",()=>setPts(getPts()));
+  </script>
+</body>
+</html>
+2:12 AM
+You sent
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BurnCoin Airdrop Dashboard</title>
+<style>
+  :root{
+    --bg:#0c0f12;
+    --card:#141a21;
+    --ink:#eaf2ff;
+    --muted:#9bb2cc;
+    --brand:#4da3ff;       /* blue for claim/spin */
+    --success:#29c36a;     /* green for BUY */
+    --danger:#ff4d4d;      /* errors */
+    --accent:#ff7a18;      /* highlight */
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+  a{color:var(--brand);text-decoration:none}
+  .wrap{max-width:960px;margin:auto;padding:18px}
+  header{
+    position:sticky; top:0; z-index:40;
+    backdrop-filter: blur(8px);
+    background:linear-gradient(180deg, rgba(12,15,18,.9), rgba(12,15,18,.65));
+    border-bottom:1px solid #1f2730;
+  }
+  header .bar{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:10px 0}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo .mark{
+    width:34px;height:34px;border-radius:8px;
+    background: radial-gradient(60% 70% at 50% 30%, #ffb36b, #ff5a1f 55%, #9c1b00);
+    box-shadow: 0 0 24px rgba(255,90,31,.35) inset, 0 0 24px rgba(255,122,24,.25);
+    position:relative;
+  }
+  .logo .mark:after{
+    content:"B"; position:absolute; inset:0;
+    display:grid; place-items:center; font-weight:800; color:#fff; font-size:18px;
+    text-shadow:0 1px 0 #0008;
+  }
+  .logo h1{font-size:18px;margin:0}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 16px;border-radius:10px;border:none;cursor:pointer;
+    color:#fff;font-weight:700;letter-spacing:.2px;
+    transition:.15s transform, .15s opacity;
+    text-decoration:none;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn.buy{background:var(--success)}
+  .btn.primary{background:var(--brand)}
+  .btn.ghost{background:#1b2430;border:1px solid #2a3644;color:var(--ink)}
+  .grid{display:grid;gap:18px;margin-top:18px}
+  @media(min-width:900px){ .grid{grid-template-columns:1.3fr 1fr} }
+
+  .card{
+    background:linear-gradient(180deg, #131922, #0f141b);
+    border:1px solid #1f2730;border-radius:16px;padding:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.02);
+  }
+  .card h2{margin:0 0 6px 0;font-size:20px}
+  .muted{color:var(--muted);font-size:14px}
+  .kpi{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px
+  }
+  .tile{background:#0e1319;border:1px solid #1e2a37;border-radius:12px;padding:12px}
+  .tile b{display:block;font-size:20px;margin-bottom:6px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .row .btn{flex:1 1 160px;justify-content:center}
+
+  .notice{margin-top:10px;padding:10px;border-radius:10px;background:#0f151c;border:1px dashed #2a3644}
+  .danger{color:var(--danger)}
+  .ok{color:var(--success)}
+
+  /* Wheel */
+  .wheel-wrap{display:grid;place-items:center;margin-top:14px}
+  .wheel{
+    width:320px;height:320px;border-radius:50%;
+    background:#0b1016;border:12px solid #1c2633;position:relative;overflow:hidden;
+    box-shadow:0 0 0 3px #0b1016, 0 6px 40px rgba(0,0,0,.25);
+  }
+  .wheel canvas{position:absolute;inset:0}
+  .pointer{
+    width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;
+    border-bottom:18px solid var(--accent);
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));
+    margin-top:8px;
+  }
+  .center-dot{
+    position:absolute;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:60px;height:60px;border-radius:50%;
+    background:#0c1117;border:8px solid #222e3c;box-shadow: inset 0 0 12px #000;
+  }
+
+  /* Sticky footer CTA */
+  .sticky{
+    position:sticky; bottom:0; z-index:50;
+    background:linear-gradient(180deg, rgba(12,15,18,.3), rgba(12,15,18,.9));
+    border-top:1px solid #1f2730;
+  }
+  .sticky .wrap{display:flex;gap:10px;justify-content:space-between;align-items:center}
+  .mini{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="logo">
+      <div class="mark"></div>
+      <h1>BurnCoin Airdrop</h1>
+    </div>
+    <a class="btn buy" href="https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657" target="_blank" rel="noopener">💰 Buy BurnCoin Now</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+    <!-- Left: Actions -->
+    <section class="card">
+      <h2>Claim & Spin</h2>
+      <div class="muted">Claim once every 24 hours (100 pts) and spin once every 24 hours to win more points.</div>
+
+      <div class="kpi">
+        <div class="tile"><b id="totalPoints">0</b><span class="muted">Total Points</span></div>
+        <div class="tile"><b id="dailyPoints">0</b><span class="muted">Daily (100)</span></div>
+        <div class="tile"><b id="spinPoints">0</b><span class="muted">Spin (10–100)</span></div>
+        <div class="tile"><b id="otherPoints">0</b><span class="muted">Other</span></div>
+      </div>
+
+      <div class="row">
+        <button id="btnClaim" class="btn primary">🗓️ Claim 100 Points</button>
+        <button id="btnSpin" class="btn primary">🎡 Spin Wheel</button>
+      </div>
+
+      <div class="row">
+        <span class="muted">Claim next in: <b id="claimTimer">ready</b></span>
+        <span class="muted" style="margin-left:auto;">Spin next in: <b id="spinTimer">ready</b></span>
+      </div>
+
+      <div class="notice" id="msg"></div>
+
+      <div class="wheel-wrap">
+        <div class="pointer"></div>
+        <div class="wheel">
+          <canvas id="wheelCanvas" width="320" height="320"></canvas>
+          <div class="center-dot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: 6-digit Code -->
+    <aside class="card">
+      <h2>6-Digit Code</h2>
+      <div class="muted">Generate a code (valid 24h) for signup/recovery demo.</div>
+
+      <div class="row">
+        <button class="btn ghost" id="genCode">🔐 Generate Code</button>
+        <button class="btn ghost" id="copyCode">📋 Copy</button>
+      </div>
+
+      <div class="kpi" style="grid-template-columns:1fr 1fr">
+        <div class="tile"><b id="codeValue">———</b><span class="muted">Your Code</span></div>
+        <div class="tile"><b id="codeLeft">—</b><span class="muted">Expires In</span></div>
+      </div>
+
+      <div class="notice">
+        <div class="mini">Note: This is an on-device demo (no emails sent). In production we’ll send codes to email and verify server-side.</div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="sticky">
+  <div class="wrap">
+    <span class="mini">⚡ 1% burn per transaction — airdrop distributes after 5 years. Gas is paid by users on withdrawal.</span>
+    <div class="row" style="margin:8px 0">
+      <a class="btn primary" href="#btnClaim" onclick="document.getElementById('btnClaim').focus();return false;">🟦 Claim / Spin</a>
+      <a class="btn buy" href="https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657" target="_blank" rel="noopener">🟩 Buy BurnCoin</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Confetti (tiny) -->
+<canvas id="confetti" style="position:fixed;inset:0;pointer-events:none"></canvas>
+
+<script>
+/* -------------------- State & Storage -------------------- */
+const LS = {
+  total: 'burn_total_points',
+  daily: 'burn_daily_points',
+  spin:  'burn_spin_points',
+  other: 'burn_other_points',
+  nextClaim: 'burn_next_claim',
+  nextSpin:  'burn_next_spin',
+  code:      'burn_code_value',
+  codeExp:   'burn_code_expire'
+};
+
+const DAY = 24*60*60*1000;
+
+function now(){ return Date.now(); }
+function loadNum(key, def=0){ const v = localStorage.getItem(key); return v? Number(v): def; }
+function saveNum(key, val){ localStorage.setItem(key, String(val)); }
+function loadStr(key, def=""){ const v = localStorage.getItem(key); return v??def; }
+function saveStr(key, val){ localStorage.setItem(key, val); }
+
+/* Points */
+let totalPoints = loadNum(LS.total, 0);
+let dailyPoints = loadNum(LS.daily, 0);
+let spinPoints  = loadNum(LS.spin, 0);
+let otherPoints = loadNum(LS.other, 0);
+
+/* Cooldowns */
+let nextClaim   = Number(localStorage.getItem(LS.nextClaim) || 0);
+let nextSpin    = Number(localStorage.getItem(LS.nextSpin)  || 0);
+
+/* Code */
+let codeValue   = loadStr(LS.code, "");
+let codeExpire  = Number(localStorage.getItem(LS.codeExp) || 0);
+
+/* -------------------- UI Helpers -------------------- */
+const $ = sel => document.querySelector(sel);
+const msg = $('#msg');
+
+function formatCountdown(ms){
+  if(ms<=0) return 'ready';
+  const s = Math.floor(ms/1000);
+  const hh = String(Math.floor(s/3600)).padStart(2,'0');
+  const mm = String(Math.floor((s%3600)/60)).padStart(2,'0');
+  const ss = String(s%60).padStart(2,'0');
+  return ${hh}:${mm}:${ss};
+}
+
+function render(){
+  $('#totalPoints').textContent = totalPoints;
+  $('#dailyPoints').textContent = dailyPoints;
+  $('#spinPoints').textContent  = spinPoints;
+  $('#otherPoints').textContent = otherPoints;
+
+  const ct = Math.max(0, nextClaim - now());
+  const st = Math.max(0, nextSpin  - now());
+  $('#claimTimer').textContent = formatCountdown(ct);
+  $('#spinTimer').textContent  = formatCountdown(st);
+
+  $('#btnClaim').disabled = ct>0;
+  $('#btnSpin').disabled  = st>0;
+
+  $('#codeValue').textContent = codeValue || '———';
+  const left = Math.max(0, codeExpire - now());
+  $('#codeLeft').textContent = codeValue ? formatCountdown(left) : '—';
+}
+
+setInterval(render, 1000);
+
+/* -------------------- Claim -------------------- */
+$('#btnClaim').addEventListener('click', ()=>{
+  const wait = nextClaim - now();
+  if(wait>0){
+    flash(⏳ Daily claim available in ${formatCountdown(wait)}., 'danger'); return;
+  }
+  addPoints(100, 'daily');
+  nextClaim = now() + DAY;
+  localStorage.setItem(LS.nextClaim, String(nextClaim));
+  flash('✅ Claimed 100 points!', 'ok');
+  confetti(250);
+  spinPulse('#btnClaim');
+});
+
+/* -------------------- Spin -------------------- */
+const prizes  = [10,20,30,50,100];
+const chances = [50,20,20,6,4]; // sum 100
+
+$('#btnSpin').addEventListener('click', ()=>{
+  const wait = nextSpin - now();
+  if(wait>0){ flash(⏳ Spin available in ${formatCountdown(wait)}., 'danger'); return; }
+
+  const result = weightedPick(prizes, chances);
+  animateWheelToPrize(result).then(()=>{
+    addPoints(result, 'spin');
+    nextSpin = now() + DAY;
+    localStorage.setItem(LS.nextSpin, String(nextSpin));
+    flash🎉 You won ${result} points!`, 'ok');
+    confetti(result>50?400:220);
+  });
+});
+
+function weightedPick(values, weights){
+  const r = Math.random()*100; let acc=0;
+  for(let i=0;i<values.length;i++){ acc+=weights[i]; if(r<=acc) return values[i]; }
+  return values.at(-1);
+}
+
+function addPoints(n, kind){
+  totalPoints += n; saveNum(LS.total, totalPoints);
+  if(kind==='daily'){ dailyPoints += n; saveNum(LS.daily, dailyPoints); }
+  else if(kind==='spin'){ spinPoints += n; saveNum(LS.spin, spinPoints); }
+  else { otherPoints += n; saveNum(LS.other, otherPoints); }
+  render();
+}
+
+/* -------------------- Code (6-digit) -------------------- */
+$('#genCode').addEventListener('click', ()=>{
+  codeValue = String(Math.floor(100000 + Math.random()*900000));
+  codeExpire = now() + DAY;
+  saveStr(LS.code, codeValue);
+  localStorage.setItem(LS.codeExp, String(codeExpire));
+  flash('🔐 Code generated (valid 24h).', 'ok');
+  render();
+});
+
+$('#copyCode').addEventListener('click', ()=>{
+  if(!codeValue){ flash('Generate a code first.', 'danger'); return; }
+  navigator.clipboard.writeText(codeValue).then(()=>flash('✅ Code copied!', 'ok'));
+});
+
+/* -------------------- Wheel Canvas -------------------- */
+const canvas = document.getElementById('wheelCanvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height, R = W/2;
+const slices = [
+  {label:'10', color:'#1c2733'},
+  {label:'20', color:'#223042'},
+  {label:'30', color:'#1c2733'},
+  {label:'50', color:'#223042'},
+  {label:'100',color:'#1c2733'},
+  {label:'10', color:'#223042'},
+  {label:'20', color:'#1c2733'},
+  {label:'30', color:'#223042'},
+  {label:'50', color:'#1c2733'},
+  {label:'10', color:'#223042'},
+];
+
+let wheelAngle = 0;
+drawWheel();
+
+function drawWheel(){
+  ctx.clearRect(0,0,W,H);
+  const cx = R, cy = R;
+  const step = (2*Math.PI)/slices.length;
+  for(let i=0;i<slices.length;i++){
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.fillStyle = slices[i].color;
+    ctx.arc(cx,cy,R, wheelAngle + i*step, wheelAngle + (i+1)*step);
+    ctx.closePath(); ctx.fill();
+
+    // Label
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(wheelAngle + i*step + step/2);
+    ctx.textAlign='center';
+    ctx.fillStyle='#fff';
+    ctx.font='700 18px system-ui';
+    ctx.fillText(slices[i].label, R-60, 6);
+    ctx.restore();
+  }
+  // glow ring
+  ctx.beginPath();
+  ctx.arc(R,R,R-6,0,2*Math.PI);
+  ctx.lineWidth=8; ctx.strokeStyle='rgba(255,122,24,.25)'; ctx.stroke();
+}
+
+function animateWheelToPrize(prize){
+  return new Promise(res=>{
+    // map prize to nearest slice showing same label
+    const indices = slices
+      .map((s,i)=>({i,v:Number(s.label)}))
+      .filter(o=>o.v===prize)
+      .map(o=>o.i);
+
+    const targetIndex = indices[Math.floor(Math.random()*indices.length)];
+    const sliceAngle = (2*Math.PI)/slices.length;
+    const targetAngle = (targetIndex + 0.5)*sliceAngle; // center of slice
+    // pointer is at 0 rad (top). We want wheelAngle so that target is at pointer after spins.
+    const currentMod = (wheelAngle % (2*Math.PI) + 2*Math.PI)%(2*Math.PI);
+    const delta = (2*Math.PI*5) + ( (2*Math.PI) - (targetAngle - currentMod) ); // 5 spins + landing
+    const duration = 2400; // ms
+    const start = performance.now();
+    const spin = (t)=>{
+      const p = Math.min(1, (t-start)/duration);
+      const ease = 1 - Math.pow(1-p, 3); // easeOutCubic
+      wheelAngle = currentMod + delta*ease;
+      drawWheel();
+      if(p<1) requestAnimationFrame(spin); else res();
+    };
+    requestAnimationFrame(spin);
+  });
+}
+
+/* -------------------- Visual feedback -------------------- */
+function flash(text, kind='ok'){
+  msg.innerHTML = text;
+  msg.style.color = kind==='danger' ? 'var(--danger)' : 'var(--ink)';
+}
+
+function spinPulse(sel){
+  const el = document.querySelector(sel);
+  el.animate([
+    { transform:'scale(1)' },
+    { transform:'scale(1.05)' },
+    { transform:'scale(1)' }
+  ], { duration:400, easing:'ease-in-out' });
+}
+
+/* -------------------- Confetti (micro) -------------------- */
+const conf = document.getElementById('confetti');
+const cctx = conf.getContext('2d');
+let confettiBits=[];
+function confetti(n=200){
+  const {width, height}=conf; conf.width=innerWidth; conf.height=innerHeight;
+  for(let i=0;i<n;i++){
+    confettiBits.push({
+      x: Math.random()*conf.width,
+      y: -10 - Math.random()*40,
+      s: 2+Math.random()*4,
+      c: Math.random()<.5?'#4da3ff':'#29c36a',
+      v: 2+Math.random()*3
+    });
+  }
+}
+function drawConfetti(){
+  cctx.clearRect(0,0,conf.width,conf.height);
+  confettiBits.forEach(p=>{
+    p.y += p.v; p.x += Math.sin(p.y/25);
+    cctx.fillStyle=p.c; cctx.fillRect(p.x,p.y,p.s,p.s);
+  });
+  confettiBits = confettiBits.filter(p=>p.y<conf.height+8);
+  requestAnimationFrame(drawConfetti);
+}
+addEventListener('resize', ()=>{conf.width=innerWidth;conf.height=innerHeight;});
+conf.width=innerWidth;conf.height=innerHeight; drawConfetti();
+
+/* -------------------- Init -------------------- */
+render(); drawWheel();
+</script>
+</body>
+</html>
