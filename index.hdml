@@ -1,523 +1,969 @@
-
-You sent
-Code   Issues   Pull requests   Actions   Projects   Wiki   Security   Insights   Settings
-You sent
-https://github.com
-You sent
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BurnCoin Airdrop System</title>
+  <title>BurnCoin Official Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    :root {
+      --bg-dark: #050810;
+      --bg-dark-alt: #090e1b;
+      --bg-light: #f5f7ff;
+      --bg-light-alt: #ffffff;
+      --text-dark: #e9f0ff;
+      --text-muted-dark: #9aa3c1;
+      --text-light: #111827;
+      --text-muted-light: #4b5563;
+      --accent-green: #1eff9c;
+      --accent-blue: #31a8ff;
+      --accent-orange: #ff7a3c;
+      --border-soft-dark: rgba(255, 255, 255, 0.07);
+      --border-soft-light: rgba(15, 23, 42, 0.08);
+      --card-radius: 18px;
+      --shadow-soft-dark: 0 20px 40px rgba(0, 0, 0, 0.45);
+      --shadow-soft-light: 0 20px 40px rgba(15, 23, 42, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background: #000;
-      color: #fff;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      padding: 40px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151a30 0, #050810 45%, #020308 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
     }
-    h1 { color: #ff4b2b; }
-    button {
-      background: linear-gradient(90deg, #ff4b2b, #ff416c);
-      border: none;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 8px;
+
+    body.light {
+      background: radial-gradient(circle at top, #e0f2ff 0, #f5f7ff 40%, #e5ecff 100%);
+      color: var(--text-light);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 16px 40px;
+      width: 100%;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft-dark);
+      background: radial-gradient(circle at top left, rgba(49, 168, 255, 0.16), transparent 55%),
+        radial-gradient(circle at top right, rgba(30, 255, 156, 0.12), transparent 55%),
+        rgba(8, 12, 32, 0.9);
+      box-shadow: var(--shadow-soft-dark);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+    }
+
+    body.light header {
+      border-color: var(--border-soft-light);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow-soft-light);
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 0, #fff3, transparent 60%), linear-gradient(135deg, #ff5b2e, #ffb347);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(255, 122, 60, 0.8);
+      font-size: 20px;
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    body.light .badge {
+      background: rgba(226, 232, 240, 0.9);
+      border-color: rgba(148, 163, 184, 0.6);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 13px;
+      align-items: center;
+    }
+
+    nav a {
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    body.light .chip {
+      background: rgba(248, 250, 252, 0.9);
+    }
+
+    .theme-toggle {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.1), transparent 55%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      font-size: 16px;
-      margin: 10px;
+      font-size: 17px;
     }
-    button:hover { opacity: 0.9; }
-    #burnPointsDisplay {
-      font-size: 30px;
-      font-weight: bold;
-      margin: 20px 0;
+
+    body.light .theme-toggle {
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.9), transparent 60%);
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 24px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        border-radius: 18px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Cards */
+    .card {
+      border-radius: 22px;
+      padding: 22px 20px;
+      border: 1px solid var(--border-soft-dark);
+      background: radial-gradient(circle at top left, rgba(49, 168, 255, 0.09), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(30, 255, 156, 0.08), transparent 65%),
+        rgba(8, 12, 32, 0.94);
+      box-shadow: var(--shadow-soft-dark);
+      backdrop-filter: blur(14px);
+    }
+
+    body.light .card {
+      border-color: var(--border-soft-light);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 249, 0.98));
+      box-shadow: var(--shadow-soft-light);
+    }
+
+    /* Hero */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.72);
+      margin-bottom: 14px;
+    }
+
+    body.light .eyebrow {
+      background: rgba(248, 250, 252, 0.95);
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #22c55e, #0f766e);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 5vw, 36px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #1eff9c, #31a8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-muted-dark);
+      max-width: 460px;
+      margin-bottom: 20px;
+    }
+
+    body.light .hero-sub {
+      color: var(--text-muted-light);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top, #57ffb9, #1eff9c);
+      color: #022c22;
+      box-shadow: 0 12px 25px rgba(34, 197, 94, 0.45);
+    }
+
+    .btn-secondary {
+      background: radial-gradient(circle at top, #7cc5ff, #31a8ff);
+      color: #021b35;
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.45);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: inherit;
+      padding-inline: 12px;
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+      opacity: 0.95;
+    }
+
+    .hero-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--text-muted-dark);
+    }
+
+    body.light .hero-footer {
+      color: var(--text-muted-light);
+    }
+
+    .hero-metric {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    body.light .hero-metric {
+      background: rgba(248, 250, 252, 0.98);
+    }
+
+    .hero-metric span {
+      font-weight: 600;
+      color: #e5f9ff;
+    }
+
+    body.light .hero-metric span {
+      color: #0f172a;
+    }
+
+    /* Right card */
+    .right-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .right-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .status-pill {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    body.light .status-pill {
+      background: rgba(22, 163, 74, 0.08);
+      color: #166534;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+      margin-top: 5px;
+    }
+
+    .stat-card {
+      border-radius: 16px;
+      padding: 10px 11px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      font-size: 11px;
+    }
+
+    .stat-label {
+      color: var(--text-muted-dark);
+      margin-bottom: 4px;
+    }
+
+    body.light .stat-label {
+      color: var(--text-muted-light);
+    }
+
+    .stat-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .stat-tag {
+      font-size: 10px;
+      opacity: 0.8;
+      margin-left: 4px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      overflow: hidden;
+      margin-top: 5px;
+    }
+
+    body.light .progress-bar {
+      background: rgba(226, 232, 240, 0.9);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #1eff9c, #31a8ff);
+      width: 80%;
+    }
+
+    .tokenomics-title {
+      font-size: 12px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      opacity: 0.9;
+    }
+
+    .tokenomics-list {
+      list-style: none;
+      font-size: 11px;
+      color: var(--text-muted-dark);
+      margin-bottom: 10px;
+    }
+
+    body.light .tokenomics-list {
+      color: var(--text-muted-light);
+    }
+
+    .tokenomics-list li {
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bullet {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1eff9c, #31a8ff);
+      flex-shrink: 0;
+    }
+
+    .timeline {
+      margin-top: 6px;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      padding-top: 8px;
+    }
+
+    .timeline-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-label {
+      color: var(--text-muted-dark);
+    }
+
+    body.light .timeline-label {
+      color: var(--text-muted-light);
+    }
+
+    .section {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .section {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted-dark);
+      margin-bottom: 12px;
+    }
+
+    body.light .section-sub {
+      color: var(--text-muted-light);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    @media (max-width: 640px) {
+      .feature-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .feature-card {
+      border-radius: 15px;
+      padding: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    body.light .feature-card {
+      background: #ffffff;
+      border-color: rgba(148, 163, 184, 0.5);
+    }
+
+    .feature-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .steps {
+      list-style: none;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .steps li {
+      margin-bottom: 6px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .step-index {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    body.light .step-index {
+      background: rgba(226, 232, 240, 0.95);
+    }
+
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .input-row input {
+      flex: 1;
+      min-width: 170px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 8px 11px;
+      font-size: 12px;
+      outline: none;
+      background: rgba(15, 23, 42, 0.8);
+      color: inherit;
+    }
+
+    body.light .input-row input {
+      background: #ffffff;
+    }
+
+    .small-text {
+      font-size: 10px;
+      color: var(--text-muted-dark);
+      margin-top: 6px;
+    }
+
+    body.light .small-text {
+      color: var(--text-muted-light);
+    }
+
+    footer {
+      margin-top: 22px;
+      font-size: 11px;
+      color: var(--text-muted-dark);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 2px;
+    }
+
+    body.light footer {
+      color: var(--text-muted-light);
+    }
+
+    footer a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
     }
   </style>
 </head>
 <body>
-  <h1>🔥 BurnCoin Airdrop 🔥</h1>
-  <p>Spin once every 24 hours to win Burn Points!</p>
-
-  <button id="btnSpin">🎰 Spin Now</button>
-  <div id="burnPointsDisplay">0</div>
-  <p>Total Burn Points</p>
-
-  <a href="https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657" target="_blank">
-    <button>💰 Buy BurnCoin Now</button>
-  </a>
-
-  <footer style="margin-top:40px;color:#999;">© 2025 BurnCoin Project</footer>
-
-  <script>
-    const CFG = {
-      SPIN_PRIZES: [
-        { points: 10, weight: 50 },
-        { points: 20, weight: 20 },
-        { points: 30, weight: 20 },
-        { points: 50, weight: 6 },
-        { points: 100, weight: 4 }
-      ],
-      SPIN_COOLDOWN_SEC: 24 * 3600
-    };
-    const K = { POINTS:"burn_points_total", LAST_SPIN:"burn_last_spin_ts" };
-    const now = ()=>Math.floor(Date.now()/1000);
-    const canAfter = (k,s)=>now()-(parseInt(localStorage.getItem(k)||"0"))>=s;
-    const stamp = k=>localStorage.setItem(k,String(now()));
-    const getPts = ()=>parseInt(localStorage.getItem(K.POINTS)||"0");
-    const setPts = n=>{localStorage.setItem(K.POINTS,String(Math.max(0,n)));document.getElementById("burnPointsDisplay").textContent=getPts();};
-    const add = n=>setPts(getPts()+Number(n||0));
-    const weightedPick = list=>{let tot=list.reduce((s,i)=>s+(i.weight||0),0);let r=Math.random()*tot;for(let i of list){if(r<i.weight)return i;r-=i.weight;}return list[list.length-1];};
-    document.getElementById("btnSpin").addEventListener("click",()=>{
-      if(!canAfter(K.LAST_SPIN,CFG.SPIN_COOLDOWN_SEC)){alert("Spin available once per 24 hours!");return;}
-      const p=weightedPick(CFG.SPIN_PRIZES).points;
-      add(p);stamp(K.LAST_SPIN);
-      alert🎉 You won ${p} points!`);
-      window.open("https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657","_blank");
-    });
-    document.addEventListener("DOMContentLoaded",()=>setPts(getPts()));
-  </script>
-</body>
-</html>
-2:12 AM
-You sent
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>BurnCoin Airdrop Dashboard</title>
-<style>
-  :root{
-    --bg:#0c0f12;
-    --card:#141a21;
-    --ink:#eaf2ff;
-    --muted:#9bb2cc;
-    --brand:#4da3ff;       /* blue for claim/spin */
-    --success:#29c36a;     /* green for BUY */
-    --danger:#ff4d4d;      /* errors */
-    --accent:#ff7a18;      /* highlight */
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
-  a{color:var(--brand);text-decoration:none}
-  .wrap{max-width:960px;margin:auto;padding:18px}
-  header{
-    position:sticky; top:0; z-index:40;
-    backdrop-filter: blur(8px);
-    background:linear-gradient(180deg, rgba(12,15,18,.9), rgba(12,15,18,.65));
-    border-bottom:1px solid #1f2730;
-  }
-  header .bar{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:10px 0}
-  .logo{display:flex;align-items:center;gap:10px}
-  .logo .mark{
-    width:34px;height:34px;border-radius:8px;
-    background: radial-gradient(60% 70% at 50% 30%, #ffb36b, #ff5a1f 55%, #9c1b00);
-    box-shadow: 0 0 24px rgba(255,90,31,.35) inset, 0 0 24px rgba(255,122,24,.25);
-    position:relative;
-  }
-  .logo .mark:after{
-    content:"B"; position:absolute; inset:0;
-    display:grid; place-items:center; font-weight:800; color:#fff; font-size:18px;
-    text-shadow:0 1px 0 #0008;
-  }
-  .logo h1{font-size:18px;margin:0}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:10px 16px;border-radius:10px;border:none;cursor:pointer;
-    color:#fff;font-weight:700;letter-spacing:.2px;
-    transition:.15s transform, .15s opacity;
-    text-decoration:none;
-  }
-  .btn:active{transform:translateY(1px)}
-  .btn.buy{background:var(--success)}
-  .btn.primary{background:var(--brand)}
-  .btn.ghost{background:#1b2430;border:1px solid #2a3644;color:var(--ink)}
-  .grid{display:grid;gap:18px;margin-top:18px}
-  @media(min-width:900px){ .grid{grid-template-columns:1.3fr 1fr} }
-
-  .card{
-    background:linear-gradient(180deg, #131922, #0f141b);
-    border:1px solid #1f2730;border-radius:16px;padding:18px;
-    box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.02);
-  }
-  .card h2{margin:0 0 6px 0;font-size:20px}
-  .muted{color:var(--muted);font-size:14px}
-  .kpi{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px
-  }
-  .tile{background:#0e1319;border:1px solid #1e2a37;border-radius:12px;padding:12px}
-  .tile b{display:block;font-size:20px;margin-bottom:6px}
-  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-  .row .btn{flex:1 1 160px;justify-content:center}
-
-  .notice{margin-top:10px;padding:10px;border-radius:10px;background:#0f151c;border:1px dashed #2a3644}
-  .danger{color:var(--danger)}
-  .ok{color:var(--success)}
-
-  /* Wheel */
-  .wheel-wrap{display:grid;place-items:center;margin-top:14px}
-  .wheel{
-    width:320px;height:320px;border-radius:50%;
-    background:#0b1016;border:12px solid #1c2633;position:relative;overflow:hidden;
-    box-shadow:0 0 0 3px #0b1016, 0 6px 40px rgba(0,0,0,.25);
-  }
-  .wheel canvas{position:absolute;inset:0}
-  .pointer{
-    width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;
-    border-bottom:18px solid var(--accent);
-    filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));
-    margin-top:8px;
-  }
-  .center-dot{
-    position:absolute;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);
-    width:60px;height:60px;border-radius:50%;
-    background:#0c1117;border:8px solid #222e3c;box-shadow: inset 0 0 12px #000;
-  }
-
-  /* Sticky footer CTA */
-  .sticky{
-    position:sticky; bottom:0; z-index:50;
-    background:linear-gradient(180deg, rgba(12,15,18,.3), rgba(12,15,18,.9));
-    border-top:1px solid #1f2730;
-  }
-  .sticky .wrap{display:flex;gap:10px;justify-content:space-between;align-items:center}
-  .mini{font-size:13px;color:var(--muted)}
-</style>
-</head>
-<body>
-
-<header>
-  <div class="wrap bar">
-    <div class="logo">
-      <div class="mark"></div>
-      <h1>BurnCoin Airdrop</h1>
-    </div>
-    <a class="btn buy" href="https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657" target="_blank" rel="noopener">💰 Buy BurnCoin Now</a>
-  </div>
-</header>
-
-<main class="wrap">
-  <div class="grid">
-    <!-- Left: Actions -->
-    <section class="card">
-      <h2>Claim & Spin</h2>
-      <div class="muted">Claim once every 24 hours (100 pts) and spin once every 24 hours to win more points.</div>
-
-      <div class="kpi">
-        <div class="tile"><b id="totalPoints">0</b><span class="muted">Total Points</span></div>
-        <div class="tile"><b id="dailyPoints">0</b><span class="muted">Daily (100)</span></div>
-        <div class="tile"><b id="spinPoints">0</b><span class="muted">Spin (10–100)</span></div>
-        <div class="tile"><b id="otherPoints">0</b><span class="muted">Other</span></div>
-      </div>
-
-      <div class="row">
-        <button id="btnClaim" class="btn primary">🗓️ Claim 100 Points</button>
-        <button id="btnSpin" class="btn primary">🎡 Spin Wheel</button>
-      </div>
-
-      <div class="row">
-        <span class="muted">Claim next in: <b id="claimTimer">ready</b></span>
-        <span class="muted" style="margin-left:auto;">Spin next in: <b id="spinTimer">ready</b></span>
-      </div>
-
-      <div class="notice" id="msg"></div>
-
-      <div class="wheel-wrap">
-        <div class="pointer"></div>
-        <div class="wheel">
-          <canvas id="wheelCanvas" width="320" height="320"></canvas>
-          <div class="center-dot"></div>
+  <div class="page">
+    <!-- Header -->
+    <header>
+      <div class="logo-wrap">
+        <div class="logo-icon">🔥</div>
+        <div>
+          <div class="logo-text-main">
+            BurnCoin
+            <span class="badge">BEP-20 • BSC</span>
+          </div>
         </div>
+      </div>
+
+      <nav>
+        <a href="#about">About</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#how-to-buy">How to Buy</a>
+        <a href="#signup">Airdrop</a>
+      </nav>
+
+      <div class="header-right">
+        <div class="chip">Official Website</div>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          🌙
+        </button>
+      </div>
+    </header>
+
+    <!-- Top layout -->
+    <div class="layout">
+      <!-- Left: Hero -->
+      <section class="card">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>Welcome to the BurnCoin Official Website</span>
+        </div>
+
+        <h1 class="hero-title">
+          The <span>deflationary</span> crypto powered by community&nbsp;& rewards.
+        </h1>
+
+        <p class="hero-sub">
+          BurnCoin is a community-driven BEP-20 token with automatic burns, long-term
+          locks, and a referral-based reward system. Hold, invite, and watch the supply
+          shrink over time.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="scrollToSection('signup')">
+            🟩 Sign Up & Earn Points
+          </button>
+          <button class="btn btn-secondary" onclick="scrollToSection('how-to-buy')">
+            🔵 Buy BurnCoin Now
+          </button>
+          <button class="btn btn-ghost" onclick="scrollToSection('tokenomics')">
+            View Tokenomics
+          </button>
+        </div>
+
+        <div class="hero-footer">
+          <div class="hero-metric">
+            🔒 <span>Liquidity locked</span> • 5 years
+          </div>
+          <div class="hero-metric">
+            🔥 <span>Auto-burn</span> on every transaction
+          </div>
+          <div class="hero-metric">
+            🎁 <span>Airdrop pool</span> for early supporters
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Stats / Tokenomics summary -->
+      <aside class="card">
+        <div class="right-card-header">
+          <div class="right-title">BurnCoin Live Snapshot</div>
+          <div class="status-pill">
+            <span class="pill-dot"></span>
+            Airdrop & Website Phase
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Supply</div>
+            <div class="stat-value">
+              1,000,000
+              <span class="stat-tag">BURN</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 100%"></div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Target Burn Floor</div>
+            <div class="stat-value">
+              100,000
+              <span class="stat-tag">BURN left</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 10%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tokenomics" class="tokenomics">
+          <div class="tokenomics-title">Tokenomics (Example Setup)</div>
+          <ul class="tokenomics-list">
+            <li>
+              <span class="bullet"></span>
+              80% — Liquidity pool (locked 5 years)
+            </li>
+            <li>
+              <span class="bullet"></span>
+              10% — Airdrop & referral rewards (locked)
+            </li>
+            <li>
+              <span class="bullet"></span>
+              10% — Team / Owner wallet (locked)
+            </li>
+            <li>
+              <span class="bullet"></span>
+              1% burn on every transaction until target supply is reached
+            </li>
+          </ul>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-row">
+            <div class="timeline-label">Phase 1</div>
+            <div>Website • Airdrop • Community build</div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-label">Phase 2</div>
+            <div>Liquidity push • Listings • Marketing</div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-label">Phase 3</div>
+            <div>Utilities • Streak rewards • Spin-wheel</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Section: About + Features -->
+    <section id="about" class="section">
+      <div class="card">
+        <h2 class="section-title">Why BurnCoin?</h2>
+        <p class="section-sub">
+          BurnCoin is designed for long-term holders who believe in deflationary
+          tokenomics, transparent locks, and fair rewards. Our mission is simple:
+          <strong>reward early believers</strong> while the supply keeps shrinking.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-title">🔥 Deflationary Supply</div>
+            <p>
+              Every transfer burns a portion of tokens automatically until the supply
+              reaches a fixed floor, making every remaining BurnCoin rarer over time.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-title">🎁 Community Airdrops</div>
+            <p>
+              Daily claim system and referral rewards to bring in real, active community
+              members — not just bots.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-title">🔒 Long-Term Locks</div>
+            <p>
+              Liquidity and core wallets are locked for multiple years to build
+              confidence and show commitment to the project.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-title">🌐 Built on BSC</div>
+            <p>
+              Fast, low-fee transactions on Binance Smart Chain, easy to use with
+              MetaMask, Trust Wallet, and other BSC wallets.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to Buy -->
+      <div id="how-to-buy" class="card">
+        <h2 class="section-title">How to Buy BurnCoin</h2>
+        <p class="section-sub">
+          Follow these simple steps to get your first BurnCoin on Binance Smart Chain.
+          You can customize these later with real links and contract address.
+        </p>
+        <ul class="steps">
+          <li>
+            <div class="step-index">1</div>
+            <div>
+              Install MetaMask or Trust Wallet and switch network to
+              <strong>BNB Smart Chain</strong>.
+            </div>
+          </li>
+          <li>
+            <div class="step-index">2</div>
+            <div>
+              Fund your wallet with a small amount of <strong>BNB</strong> for gas and
+              swapping.
+            </div>
+          </li>
+          <li>
+            <div class="step-index">3</div>
+            <div>
+              Open <strong>PancakeSwap</strong>, paste the official BurnCoin contract
+              address, and import the token.
+            </div>
+          </li>
+          <li>
+            <div class="step-index">4</div>
+            <div>
+              Swap BNB → BurnCoin. Hold, invite friends, and watch burning + rewards
+              over time.
+            </div>
+          </li>
+        </ul>
+
+        <div class="hero-actions" style="margin-top:10px;">
+          <button class="btn btn-secondary">
+            Open PancakeSwap (soon)
+          </button>
+          <button class="btn btn-ghost">
+            View on BscScan (soon)
+          </button>
+        </div>
+
+        <p class="small-text">
+          ⚠️ Always double-check contract address from official channels before buying.
+        </p>
       </div>
     </section>
 
-    <!-- Right: 6-digit Code -->
-    <aside class="card">
-      <h2>6-Digit Code</h2>
-      <div class="muted">Generate a code (valid 24h) for signup/recovery demo.</div>
+    <!-- Section: Signup / Airdrop -->
+    <section id="signup" class="section">
+      <div class="card">
+        <h2 class="section-title">Join the Airdrop & Referral Program</h2>
+        <p class="section-sub">
+          Sign up with your email to join the early-supporter list. In the full version,
+          this connects to your wallet, tracks daily claims, and counts referrals.
+        </p>
 
-      <div class="row">
-        <button class="btn ghost" id="genCode">🔐 Generate Code</button>
-        <button class="btn ghost" id="copyCode">📋 Copy</button>
+        <div class="input-row">
+          <input type="email" id="email" placeholder="Enter your email address" />
+          <button class="btn btn-primary" onclick="fakeSignup()">
+            🟩 Sign Up & Reserve Spot
+          </button>
+        </div>
+
+        <p class="small-text" id="signup-status">
+          No wallet connection required for preview. Later we can link this to your real
+          OTP + wallet system.
+        </p>
       </div>
 
-      <div class="kpi" style="grid-template-columns:1fr 1fr">
-        <div class="tile"><b id="codeValue">———</b><span class="muted">Your Code</span></div>
-        <div class="tile"><b id="codeLeft">—</b><span class="muted">Expires In</span></div>
+      <div class="card">
+        <h2 class="section-title">Referral & Daily Claim (Planned)</h2>
+        <p class="section-sub">
+          This is where we will plug in your real system:
+        </p>
+        <ul class="steps">
+          <li>
+            <div class="step-index">1</div>
+            <div>Connect wallet (MetaMask / Trust Wallet).</div>
+          </li>
+          <li>
+            <div class="step-index">2</div>
+            <div>One-click daily claim (e.g., 100 points every 24 hours).</div>
+          </li>
+          <li>
+            <div class="step-index">3</div>
+            <div>Share referral link and earn bonus points when friends sign up.</div>
+          </li>
+          <li>
+            <div class="step-index">4</div>
+            <div>Later: redeem points for BurnCoin, whitelist spots, or spin-wheel.</div>
+          </li>
+        </ul>
       </div>
+    </section>
 
-      <div class="notice">
-        <div class="mini">Note: This is an on-device demo (no emails sent). In production we’ll send codes to email and verify server-side.</div>
+    <!-- Footer -->
+    <footer>
+      <div>© <span id="year"></span> BurnCoin Project. All rights reserved.</div>
+      <div>
+        Designed for community •
+        <a href="#about">Read more</a>
       </div>
-    </aside>
+    </footer>
   </div>
-</main>
 
-<footer class="sticky">
-  <div class="wrap">
-    <span class="mini">⚡ 1% burn per transaction — airdrop distributes after 5 years. Gas is paid by users on withdrawal.</span>
-    <div class="row" style="margin:8px 0">
-      <a class="btn primary" href="#btnClaim" onclick="document.getElementById('btnClaim').focus();return false;">🟦 Claim / Spin</a>
-      <a class="btn buy" href="https://pancakeswap.finance/swap?outputCurrency=0x2FAf2CD87366cF6640654aDfBf53BedF9Ae90657" target="_blank" rel="noopener">🟩 Buy BurnCoin</a>
-    </div>
-  </div>
-</footer>
+  <script>
+    // Simple theme toggle
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+      const btn = document.querySelector(".theme-toggle");
+      btn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
+    }
 
-<!-- Confetti (tiny) -->
-<canvas id="confetti" style="position:fixed;inset:0;pointer-events:none"></canvas>
+    // Smooth scroll helper
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
-<script>
-/* -------------------- State & Storage -------------------- */
-const LS = {
-  total: 'burn_total_points',
-  daily: 'burn_daily_points',
-  spin:  'burn_spin_points',
-  other: 'burn_other_points',
-  nextClaim: 'burn_next_claim',
-  nextSpin:  'burn_next_spin',
-  code:      'burn_code_value',
-  codeExp:   'burn_code_expire'
-};
+    // Fake signup handler (placeholder – you can later connect OTP/email system)
+    function fakeSignup() {
+      const emailInput = document.getElementById("email");
+      const status = document.getElementById("signup-status");
+      const email = emailInput.value.trim();
 
-const DAY = 24*60*60*1000;
+      if (!email) {
+        status.textContent = "Please enter a valid email first.";
+        return;
+      }
 
-function now(){ return Date.now(); }
-function loadNum(key, def=0){ const v = localStorage.getItem(key); return v? Number(v): def; }
-function saveNum(key, val){ localStorage.setItem(key, String(val)); }
-function loadStr(key, def=""){ const v = localStorage.getItem(key); return v??def; }
-function saveStr(key, val){ localStorage.setItem(key, val); }
+      status.textContent =
+        "Your email is noted for BurnCoin airdrop preview. In the real version, this will send OTP / connect wallet.";
+      emailInput.value = "";
+    }
 
-/* Points */
-let totalPoints = loadNum(LS.total, 0);
-let dailyPoints = loadNum(LS.daily, 0);
-let spinPoints  = loadNum(LS.spin, 0);
-let otherPoints = loadNum(LS.other, 0);
-
-/* Cooldowns */
-let nextClaim   = Number(localStorage.getItem(LS.nextClaim) || 0);
-let nextSpin    = Number(localStorage.getItem(LS.nextSpin)  || 0);
-
-/* Code */
-let codeValue   = loadStr(LS.code, "");
-let codeExpire  = Number(localStorage.getItem(LS.codeExp) || 0);
-
-/* -------------------- UI Helpers -------------------- */
-const $ = sel => document.querySelector(sel);
-const msg = $('#msg');
-
-function formatCountdown(ms){
-  if(ms<=0) return 'ready';
-  const s = Math.floor(ms/1000);
-  const hh = String(Math.floor(s/3600)).padStart(2,'0');
-  const mm = String(Math.floor((s%3600)/60)).padStart(2,'0');
-  const ss = String(s%60).padStart(2,'0');
-  return ${hh}:${mm}:${ss};
-}
-
-function render(){
-  $('#totalPoints').textContent = totalPoints;
-  $('#dailyPoints').textContent = dailyPoints;
-  $('#spinPoints').textContent  = spinPoints;
-  $('#otherPoints').textContent = otherPoints;
-
-  const ct = Math.max(0, nextClaim - now());
-  const st = Math.max(0, nextSpin  - now());
-  $('#claimTimer').textContent = formatCountdown(ct);
-  $('#spinTimer').textContent  = formatCountdown(st);
-
-  $('#btnClaim').disabled = ct>0;
-  $('#btnSpin').disabled  = st>0;
-
-  $('#codeValue').textContent = codeValue || '———';
-  const left = Math.max(0, codeExpire - now());
-  $('#codeLeft').textContent = codeValue ? formatCountdown(left) : '—';
-}
-
-setInterval(render, 1000);
-
-/* -------------------- Claim -------------------- */
-$('#btnClaim').addEventListener('click', ()=>{
-  const wait = nextClaim - now();
-  if(wait>0){
-    flash(⏳ Daily claim available in ${formatCountdown(wait)}., 'danger'); return;
-  }
-  addPoints(100, 'daily');
-  nextClaim = now() + DAY;
-  localStorage.setItem(LS.nextClaim, String(nextClaim));
-  flash('✅ Claimed 100 points!', 'ok');
-  confetti(250);
-  spinPulse('#btnClaim');
-});
-
-/* -------------------- Spin -------------------- */
-const prizes  = [10,20,30,50,100];
-const chances = [50,20,20,6,4]; // sum 100
-
-$('#btnSpin').addEventListener('click', ()=>{
-  const wait = nextSpin - now();
-  if(wait>0){ flash(⏳ Spin available in ${formatCountdown(wait)}., 'danger'); return; }
-
-  const result = weightedPick(prizes, chances);
-  animateWheelToPrize(result).then(()=>{
-    addPoints(result, 'spin');
-    nextSpin = now() + DAY;
-    localStorage.setItem(LS.nextSpin, String(nextSpin));
-    flash🎉 You won ${result} points!`, 'ok');
-    confetti(result>50?400:220);
-  });
-});
-
-function weightedPick(values, weights){
-  const r = Math.random()*100; let acc=0;
-  for(let i=0;i<values.length;i++){ acc+=weights[i]; if(r<=acc) return values[i]; }
-  return values.at(-1);
-}
-
-function addPoints(n, kind){
-  totalPoints += n; saveNum(LS.total, totalPoints);
-  if(kind==='daily'){ dailyPoints += n; saveNum(LS.daily, dailyPoints); }
-  else if(kind==='spin'){ spinPoints += n; saveNum(LS.spin, spinPoints); }
-  else { otherPoints += n; saveNum(LS.other, otherPoints); }
-  render();
-}
-
-/* -------------------- Code (6-digit) -------------------- */
-$('#genCode').addEventListener('click', ()=>{
-  codeValue = String(Math.floor(100000 + Math.random()*900000));
-  codeExpire = now() + DAY;
-  saveStr(LS.code, codeValue);
-  localStorage.setItem(LS.codeExp, String(codeExpire));
-  flash('🔐 Code generated (valid 24h).', 'ok');
-  render();
-});
-
-$('#copyCode').addEventListener('click', ()=>{
-  if(!codeValue){ flash('Generate a code first.', 'danger'); return; }
-  navigator.clipboard.writeText(codeValue).then(()=>flash('✅ Code copied!', 'ok'));
-});
-
-/* -------------------- Wheel Canvas -------------------- */
-const canvas = document.getElementById('wheelCanvas');
-const ctx = canvas.getContext('2d');
-const W = canvas.width, H = canvas.height, R = W/2;
-const slices = [
-  {label:'10', color:'#1c2733'},
-  {label:'20', color:'#223042'},
-  {label:'30', color:'#1c2733'},
-  {label:'50', color:'#223042'},
-  {label:'100',color:'#1c2733'},
-  {label:'10', color:'#223042'},
-  {label:'20', color:'#1c2733'},
-  {label:'30', color:'#223042'},
-  {label:'50', color:'#1c2733'},
-  {label:'10', color:'#223042'},
-];
-
-let wheelAngle = 0;
-drawWheel();
-
-function drawWheel(){
-  ctx.clearRect(0,0,W,H);
-  const cx = R, cy = R;
-  const step = (2*Math.PI)/slices.length;
-  for(let i=0;i<slices.length;i++){
-    ctx.beginPath();
-    ctx.moveTo(cx,cy);
-    ctx.fillStyle = slices[i].color;
-    ctx.arc(cx,cy,R, wheelAngle + i*step, wheelAngle + (i+1)*step);
-    ctx.closePath(); ctx.fill();
-
-    // Label
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(wheelAngle + i*step + step/2);
-    ctx.textAlign='center';
-    ctx.fillStyle='#fff';
-    ctx.font='700 18px system-ui';
-    ctx.fillText(slices[i].label, R-60, 6);
-    ctx.restore();
-  }
-  // glow ring
-  ctx.beginPath();
-  ctx.arc(R,R,R-6,0,2*Math.PI);
-  ctx.lineWidth=8; ctx.strokeStyle='rgba(255,122,24,.25)'; ctx.stroke();
-}
-
-function animateWheelToPrize(prize){
-  return new Promise(res=>{
-    // map prize to nearest slice showing same label
-    const indices = slices
-      .map((s,i)=>({i,v:Number(s.label)}))
-      .filter(o=>o.v===prize)
-      .map(o=>o.i);
-
-    const targetIndex = indices[Math.floor(Math.random()*indices.length)];
-    const sliceAngle = (2*Math.PI)/slices.length;
-    const targetAngle = (targetIndex + 0.5)*sliceAngle; // center of slice
-    // pointer is at 0 rad (top). We want wheelAngle so that target is at pointer after spins.
-    const currentMod = (wheelAngle % (2*Math.PI) + 2*Math.PI)%(2*Math.PI);
-    const delta = (2*Math.PI*5) + ( (2*Math.PI) - (targetAngle - currentMod) ); // 5 spins + landing
-    const duration = 2400; // ms
-    const start = performance.now();
-    const spin = (t)=>{
-      const p = Math.min(1, (t-start)/duration);
-      const ease = 1 - Math.pow(1-p, 3); // easeOutCubic
-      wheelAngle = currentMod + delta*ease;
-      drawWheel();
-      if(p<1) requestAnimationFrame(spin); else res();
-    };
-    requestAnimationFrame(spin);
-  });
-}
-
-/* -------------------- Visual feedback -------------------- */
-function flash(text, kind='ok'){
-  msg.innerHTML = text;
-  msg.style.color = kind==='danger' ? 'var(--danger)' : 'var(--ink)';
-}
-
-function spinPulse(sel){
-  const el = document.querySelector(sel);
-  el.animate([
-    { transform:'scale(1)' },
-    { transform:'scale(1.05)' },
-    { transform:'scale(1)' }
-  ], { duration:400, easing:'ease-in-out' });
-}
-
-/* -------------------- Confetti (micro) -------------------- */
-const conf = document.getElementById('confetti');
-const cctx = conf.getContext('2d');
-let confettiBits=[];
-function confetti(n=200){
-  const {width, height}=conf; conf.width=innerWidth; conf.height=innerHeight;
-  for(let i=0;i<n;i++){
-    confettiBits.push({
-      x: Math.random()*conf.width,
-      y: -10 - Math.random()*40,
-      s: 2+Math.random()*4,
-      c: Math.random()<.5?'#4da3ff':'#29c36a',
-      v: 2+Math.random()*3
-    });
-  }
-}
-function drawConfetti(){
-  cctx.clearRect(0,0,conf.width,conf.height);
-  confettiBits.forEach(p=>{
-    p.y += p.v; p.x += Math.sin(p.y/25);
-    cctx.fillStyle=p.c; cctx.fillRect(p.x,p.y,p.s,p.s);
-  });
-  confettiBits = confettiBits.filter(p=>p.y<conf.height+8);
-  requestAnimationFrame(drawConfetti);
-}
-addEventListener('resize', ()=>{conf.width=innerWidth;conf.height=innerHeight;});
-conf.width=innerWidth;conf.height=innerHeight; drawConfetti();
-
-/* -------------------- Init -------------------- */
-render(); drawWheel();
-</script>
+    // Set year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
